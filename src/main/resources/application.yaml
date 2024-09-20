@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: bank-issuer-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+
+card-bin-service:
+  bin-info-source-url: https://ecom-bininfo.s3.eu-west-1.amazonaws.com/bininfo.json.zip
+  schedular:
+    update-card-bin-info: 0 0 * * * *
+
+card-bin-lookup-service:
+  card-padding-zeros: 0000000000000000000
+
+
