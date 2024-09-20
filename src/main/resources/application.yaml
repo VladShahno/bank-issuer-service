@@ -2,7 +2,7 @@ spring:
   application:
     name: bank-issuer-service
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/card_bin_info}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/card_bin_info}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
@@ -18,6 +18,6 @@ card-bin-service:
     update-card-bin-info: 0 0 * * * *
 
 card-bin-lookup-service:
-  card-padding-zeros: 0000000000000000000
+  card-padding-zeros: '0000000000000000000'
 
 

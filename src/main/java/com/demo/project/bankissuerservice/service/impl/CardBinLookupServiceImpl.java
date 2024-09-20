@@ -5,23 +5,24 @@ import com.demo.project.bankissuerservice.exception.BankNotFoundException;
 import com.demo.project.bankissuerservice.mapper.CardBinMapper;
 import com.demo.project.bankissuerservice.repository.CardBinInfoRepository;
 import com.demo.project.bankissuerservice.service.CardBinLookupService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-@AllArgsConstructor
-@RequiredArgsConstructor
 public class CardBinLookupServiceImpl implements CardBinLookupService {
 
-    private CardBinInfoRepository repository;
-    private CardBinMapper cardBinMapper;
+    private final CardBinInfoRepository repository;
+    private final CardBinMapper cardBinMapper;
 
-    @Value("${card-bin-service.card-bin-lookup-service.card-padding-zeros}")
+    @Value("${card-bin-lookup-service.card-padding-zeros}")
     private String cardPaddingZeros;
+
+    public CardBinLookupServiceImpl(CardBinInfoRepository repository, CardBinMapper cardBinMapper) {
+        this.repository = repository;
+        this.cardBinMapper = cardBinMapper;
+    }
 
     @Override
     public BankInfoDtoResponse findBankInfoByCardNumber(String cardNumber) {

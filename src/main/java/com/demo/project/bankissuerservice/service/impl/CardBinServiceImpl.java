@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,17 +21,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class CardBinServiceImpl implements CardBinService {
 
-    private CardBinInfoRepository repository;
+    private final CardBinInfoRepository repository;
 
     @Value("${card-bin-service.bin-info-source-url}")
     private String binInfoResourceUrl;
 
+    public CardBinServiceImpl(CardBinInfoRepository repository) {
+        this.repository = repository;
+    }
+
     @Transactional
-    @Scheduled(cron = "${card-bin-lookup-service.card-padding-zeros}")
+    @Scheduled(cron = "${card-bin-service.schedular.update-card-bin-info}")
     @Override
     public void updateCardBinInfo() {
         try (InputStream inputStream = new URL(binInfoResourceUrl).openStream();
