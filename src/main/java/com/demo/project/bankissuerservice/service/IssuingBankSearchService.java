@@ -2,8 +2,7 @@ package com.demo.project.bankissuerservice.service;
 
 import com.demo.project.bankissuerservice.dto.response.BankInfoDtoResponse;
 
-public interface CardBinLookupService {
+public interface IssuingBankSearchService {
 
-    BankInfoDtoResponse findBankInfoByCardNumber(String cardNumber);
-
+    BankInfoDtoResponse findIssuingBankInfo(String cardNumber);
 }

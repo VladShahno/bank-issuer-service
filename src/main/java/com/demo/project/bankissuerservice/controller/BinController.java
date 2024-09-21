@@ -1,10 +1,8 @@
 package com.demo.project.bankissuerservice.controller;
 
-import static com.demo.project.bankissuerservice.util.CardUtil.cleanCardNumber;
-
 import com.demo.project.bankissuerservice.dto.request.BankInfoDtoRequest;
 import com.demo.project.bankissuerservice.dto.response.BankInfoDtoResponse;
-import com.demo.project.bankissuerservice.service.CardBinLookupService;
+import com.demo.project.bankissuerservice.service.IssuingBankSearchService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class BinController {
 
-    private CardBinLookupService cardBinLookupService;
+    private IssuingBankSearchService issuingBankSearchService;
 
     @PostMapping
-    public ResponseEntity<BankInfoDtoResponse> getCardBinInfo(
+    public ResponseEntity<BankInfoDtoResponse> getIssuingBankInfo(
         @RequestBody BankInfoDtoRequest request) {
-        String cleanedCardNumber = cleanCardNumber(request.getCard());
-        return ResponseEntity.ok(cardBinLookupService.findBankInfoByCardNumber(cleanedCardNumber));
+
+        return ResponseEntity.ok(issuingBankSearchService.findIssuingBankInfo(request.getCard()));
     }
 }

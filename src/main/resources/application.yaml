@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /bank-issuer-service
+
 spring:
   application:
     name: bank-issuer-service
@@ -10,14 +14,13 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
 card-bin-service:
   bin-info-source-url: https://ecom-bininfo.s3.eu-west-1.amazonaws.com/bininfo.json.zip
+  batch-size: 1000
   schedular:
     update-card-bin-info: 0 0 * * * *
-
-card-bin-lookup-service:
-  card-padding-zeros: '0000000000000000000'
-
-
