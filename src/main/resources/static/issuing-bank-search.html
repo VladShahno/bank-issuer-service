@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Issuer Search</title>
+  <style>
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+      th, td {
+          border: 1px solid black;
+          padding: 8px;
+          text-align: left;
+      }
+      th {
+          background-color: #f2f2f2;
+      }
+  </style>
+</head>
+<body>
+
+<h1>Search for Issuing Bank</h1>
+
+<form id="cardForm">
+  <label for="card">Card Number:</label>
+  <input type="text" id="card" name="card" placeholder="Enter card number">
+  <button type="button" onclick="searchBank()">Search</button>
+</form>
+
+<br>
+
+<table id="resultTable">
+  <thead>
+  <tr>
+    <th>BIN</th>
+    <th>Alpha Code</th>
+    <th>Bank</th>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+  function searchBank() {
+    const cardNumber = document.getElementById('card').value;
+
+    console.log("Card Number entered:", cardNumber);
+
+    fetch('http://localhost:8080/bank-issuer-service/api/bin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ card: cardNumber })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("API response:", data);
+
+      const table = document.getElementById('resultTable').querySelector('tbody');
+      table.innerHTML = `
+        <tr>
+          <td>${data.bin}</td>
+          <td>${data.alphacode}</td>
+          <td>${data.bank}</td>
+        </tr>`;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+</script>
+
+</body>
+</html>
