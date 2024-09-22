@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/bin")
 @AllArgsConstructor
 @Validated
-public class BinController {
+public class IssuingBankController {
 
     private IssuingBankSearchService issuingBankSearchService;
 

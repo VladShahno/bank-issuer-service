@@ -1,4 +1,4 @@
-package com.demo.project.bankissuerservice.model;
+package com.demo.project.bankissuerservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;

@@ -1,7 +1,7 @@
 package com.demo.project.bankissuerservice.service.impl;
 
 import com.demo.project.bankissuerservice.exception.CardBinInfoUpdateException;
-import com.demo.project.bankissuerservice.model.CardBinInfo;
+import com.demo.project.bankissuerservice.entity.CardBinInfo;
 import com.demo.project.bankissuerservice.repository.CardBinInfoRepository;
 import com.demo.project.bankissuerservice.service.CardRangeDirectoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
